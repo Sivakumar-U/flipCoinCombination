@@ -2,21 +2,32 @@
 
 declare -A dictionary
 
-dictionary[Heads]=0
-dictionary[Tails]=0
-isHeads=1
+dictionary[HH]=0
+dictionary[HT]=0
+dictionary[TH]=0
+dictionary[TT]=0
 
 for (( i=0; i<10; i++ ))
 do
-	randomCheck=$((RANDOM%2))
-
-	if [ $randomCheck -eq $isHeads ]
-	then
-		((dictionary[Heads]++))
-	else
-		((dictionary[Tails]++))
-	fi
+	randomCheck1=$((RANDOM%2))
+	randomCheck2=$((RANDOM%2))
+	case $randomCheck1$randomCheck2 in
+		11)
+			((dictionary[HH]++))
+		;;
+		10)
+			((dictionary[HT]++))
+		;;
+		01)
+			((dictionary[TH]++))
+		;;
+		00)
+			((dictionary[TT]++))
+		;;
+	esac
 done
 
-echo "Heads percentage: $((${dictionary[Heads]}*100/10)) percent"
-echo "Tails percentage: $((${dictionary[Tails]}*100/10)) percent"
+echo "Double heads percentage: $((${dictionary[HH]}*100/10)) percent"
+echo "Single head and tail percentage: $((${dictionary[HT]}*100/10)) percent"
+echo "Single tail and head percentage: $((${dictionary[TH]}*100/10)) percent"
+echo "Double Tails percentage: $((${dictionary[TT]}*100/10)) percent"
