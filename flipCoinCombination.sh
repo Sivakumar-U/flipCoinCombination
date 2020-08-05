@@ -2,32 +2,54 @@
 
 declare -A dictionary
 
-dictionary[HH]=0
-dictionary[HT]=0
-dictionary[TH]=0
-dictionary[TT]=0
+dictionary[HHH]=0
+dictionary[HHT]=0
+dictionary[HTH]=0
+dictionary[THH]=0
+dictionary[HTT]=0
+dictionary[THT]=0
+dictionary[TTH]=0
+dictionary[TTT]=0
+
 
 for (( i=0; i<10; i++ ))
 do
 	randomCheck1=$((RANDOM%2))
 	randomCheck2=$((RANDOM%2))
-	case $randomCheck1$randomCheck2 in
-		11)
-			((dictionary[HH]++))
+	randomCheck3=$((RANDOM%2))
+	case $randomCheck1$randomCheck2$randomCheck3 in
+		111)
+			((dictionary[HHH]++))
 		;;
-		10)
-			((dictionary[HT]++))
+		110)
+			((dictionary[HHT]++))
 		;;
-		01)
-			((dictionary[TH]++))
+		101)
+			((dictionary[HTH]++))
 		;;
-		00)
-			((dictionary[TT]++))
-		;;
+		011)
+			((dictionary[THH]++))
+       		;;
+		100)
+                        ((dictionary[HTT]++))
+                ;;
+                010)
+                        ((dictionary[THT]++))
+                ;;
+                001)
+                        ((dictionary[TTH]++))
+                ;;
+                000)
+                        ((dictionary[TTT]++))
+
 	esac
 done
 
-echo "Double heads percentage: $((${dictionary[HH]}*100/10)) percent"
-echo "Single head and tail percentage: $((${dictionary[HT]}*100/10)) percent"
-echo "Single tail and head percentage: $((${dictionary[TH]}*100/10)) percent"
-echo "Double Tails percentage: $((${dictionary[TT]}*100/10)) percent"
+echo "Triplet percentage of HHH: $((${dictionary[HHH]}*100/10)) percent"
+echo "Triplet percentage of HHT: $((${dictionary[HHT]}*100/10)) percent"
+echo "Triplet percentage of HTH: $((${dictionary[HTH]}*100/10)) percent"
+echo "Triplet percentage of THH: $((${dictionary[THH]}*100/10)) percent"
+echo "Triplet percentage of HTT: $((${dictionary[HTT]}*100/10)) percent"
+echo "Triplet percentage of THT: $((${dictionary[THT]}*100/10)) percent"
+echo "Triplet percentage of TTH: $((${dictionary[TTH]}*100/10)) percent"
+echo "Triplet percentage of TTT: $((${dictionary[TTT]}*100/10)) percent"
